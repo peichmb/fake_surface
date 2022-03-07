@@ -1,26 +1,11 @@
 module variables
 
+  use parameters
+
   implicit none
 
-  ! Parameters
-  ! ----------
-  ! Domain
-  integer, parameter :: NLAT=4, NLON=5
-  double precision, parameter :: LAT0=-7.75d0, LON0=-55.625d0
-  double precision, parameter :: DLON=1.875d0, DLAT=2.0d0
-  integer, parameter :: is=0, ie=NLAT-1, js=0, je=NLON-1
-  integer, parameter :: NDAYS=5, NTSTEPS_DAY=24;
-  ! Timing
-  integer, parameter :: TSTEPS=NDAYS*NTSTEPS_DAY
-  ! Climate data
-  integer, parameter :: LEN_FNAME=100
-  character(100) :: CLIMATE_DATA_PATH = "../../test_data/" ! Finish with /
-  double precision :: z_level = 10.d0
-
-  ! Variables
-  ! ---------
   integer :: timestep
-  double precision, dimension(is:ie, js:je) :: &
+  double precision, dimension(:,:), allocatable :: &
       lat, lon, &                                               ! Domain
       swdown, lwdown, prec, tair, wind_speed, qair, psurf, &    ! Forcings
       swup, lwup, shup, lhup                                    ! Output
@@ -34,6 +19,20 @@ contains
     integer :: i, j, ij
 
     timestep = 0
+
+    allocate(lat(is:ie, js:je))
+    allocate(lon(is:ie, js:je))
+    allocate(swdown(is:ie, js:je))
+    allocate(lwdown(is:ie, js:je))
+    allocate(prec(is:ie, js:je))
+    allocate(tair(is:ie, js:je))
+    allocate(wind_speed(is:ie, js:je))
+    allocate(qair(is:ie, js:je))
+    allocate(psurf(is:ie, js:je))
+    allocate(swup(is:ie, js:je))
+    allocate(lwup(is:ie, js:je))
+    allocate(shup(is:ie, js:je))
+    allocate(lhup(is:ie, js:je))
 
     do j=js, je
         lon(:,j) = LON0 + DLON*j

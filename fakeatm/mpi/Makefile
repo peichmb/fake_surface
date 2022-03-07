@@ -12,19 +12,23 @@ BIN := fakeatm.x
 
 $(BIN): $(OBJECTS)
 	$(FC) -o $@ $^ -Wl,-rpath=$(LOCAL_LIB) -lstdc++ -L$(LOCAL_LIB) -lmpifort -lnetcdff -L$(LSM_LIB) -llsm
-	rm *.mod
+	$(RM) *.mod
 
 $(BLD)/%.o: $(SRC)/%.F90
 	mkdir -p $(BLD)
-	$(FC) -o $@ -c $< -I$(LOCAL_INCLUDE) -I$(LSM_INCLUDE)
+	$(FC) -o $@ -c $< -O2 -I$(LOCAL_INCLUDE) -I$(LSM_INCLUDE)
 	
 clean:
-	rm $(BLD)/*
-	rm $(OUTPUT)/*
-	rm $(BIN)
-	rm *.txt
+	$(RM) $(BLD)/*
+	$(RM) $(OUTPUT)/*
+	$(RM) $(BIN)
+	$(RM) *.txt
+	$(RM) fakeatm_serial.x
+	$(RM) parameters_serial.in
 
 compare:
-	../serial/fakeatm.x > out_serial.txt
-	mpirun -n 6 ./fakeatm.x > out_mpi.txt
+	ln -s ../serial/fakeatm.x fakeatm_serial.x
+	ln -s ../serial/parameters.in parameters_serial.in
+	./fakeatm_serial.x parameters_serial.in > out_serial.txt
+	mpirun -n 6 ./fakeatm.x parameters.in > out_mpi.txt
 	diff out_mpi.txt out_serial.txt

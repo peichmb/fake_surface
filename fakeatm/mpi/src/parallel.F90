@@ -17,6 +17,10 @@ contains
     call MPI_Comm_size(MPI_COMM_WORLD, mpi_nproc, mpi_errcode)
     call MPI_Comm_rank(MPI_COMM_WORLD, mpi_rank, mpi_errcode)
 
+  end subroutine init_parallel
+
+  subroutine check_domain()
+
     if (NDOM_LAT*NDOM_LON /= mpi_nproc) then
       call MPI_Finalize(mpi_errcode);
       if (mpi_rank==0) then
@@ -26,7 +30,7 @@ contains
       end if
     end if
 
-  end subroutine init_parallel
+  end subroutine check_domain
 
   subroutine finalize_parallel()
 

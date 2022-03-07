@@ -6,13 +6,16 @@ module surface
   implicit none
 
   integer :: size_world
-  double precision, dimension(is:ie,js:je) :: albedo
+  double precision, dimension(:,:), allocatable :: albedo
 
 contains
 
   subroutine init_surface()
 
     integer :: i, j, ij
+
+    allocate(albedo(is:ie,js:je))
+
     size_world = NLAT*NLON
     call init_world(size_world)
     do i = is,ie

@@ -30,8 +30,8 @@ main_f.x: main_f.F90 $(LSM_LIB)/liblsm.a
 	$(FC) main_f.F90 -I$(LSM_INC) -L$(LSM_LIB) -llsm -lstdc++ -o main_f.x
 
 clean:
-	rm $(LSM_INC)/*
-	rm $(LSM_LIB)/*
-	rm $(LSM_OBJ)/*
-	rm *.x
+	$(RM) $(LSM_INC)/*
+	$(RM) $(LSM_LIB)/*
+	$(RM) $(LSM_OBJ)/*
+	$(RM) *.x
 

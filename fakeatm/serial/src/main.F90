@@ -1,5 +1,6 @@
-program fakewrf
+program fakeatm
 
+  use parameters
   use variables
   use atmosphere, only : init_atmosphere, ts_atmosphere
   use surface, only : init_surface, ts_surface, albedo
@@ -7,6 +8,7 @@ program fakewrf
   implicit none
 
   ! INITIALIZATION
+  call init_parameters()
   call init_variables()
   call init_atmosphere()
   call init_surface()
@@ -18,4 +20,4 @@ program fakewrf
     call print_var(swup)
   end do
 
-end program fakewrf
+end program fakeatm

@@ -5,7 +5,7 @@ module atmosphere
 
   implicit none
 
-  character(len=LEN_FNAME), dimension(is:ie, js:je) :: climate_fnames
+  character(len=LEN_FNAME), dimension(:,:), allocatable :: climate_fnames
 
 contains
 
@@ -52,6 +52,8 @@ contains
     implicit none
 
     integer :: i, j
+
+    allocate(climate_fnames(is:ie, js:je))
 
     do i=is, ie
       do j=js, je

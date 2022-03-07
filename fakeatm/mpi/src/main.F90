@@ -1,6 +1,7 @@
 program fakeatm
 
-  use parallel, only : init_parallel, finalize_parallel
+  use parameters
+  use parallel, only : init_parallel, finalize_parallel, check_domain, mpi_rank
   use grid, only : init_grid, finalize_grid, print_var
   use variables
   use atmosphere, only : init_atmosphere, ts_atmosphere
@@ -10,6 +11,8 @@ program fakeatm
 
   ! INITIALIZATION
   call init_parallel()
+  call init_parameters(mpi_rank)
+  call check_domain()
   call init_grid()
   call init_variables()
   call init_atmosphere()
@@ -19,11 +22,20 @@ program fakeatm
   do timestep=1,TSTEPS
     call ts_atmosphere()
     call ts_surface()
-    call print_var(swup)
+    call print_to_screen()
     call write_output()
   end do
 
   call finalize_grid()
   call finalize_parallel()
 
+contains
+
+  subroutine print_to_screen()
+
+    if (SCREEN_OUTPUT .and. mod(timestep,TSTEPS_WRITE) == 0) then
+      call print_var(swup)
+    end if
+
+  end subroutine print_to_screen
 end program fakeatm
