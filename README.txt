@@ -50,4 +50,6 @@ make
 
 make compare
 
-// The MPI version of fakeatm stores output in binary files. Sample programs handling the output can be found in the fakeatm/mpi/extras directory.
+The output files produced by the serial and parallel programs should be identical when running both programs with the provided parameter.in files. Examining these should give you an idea of how to use the code.
+
+The MPI version of fakeatm stores output in binary files. Sample programs handling the output can be found in the fakeatm/mpi/extras directory.
