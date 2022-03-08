@@ -1,0 +1,4 @@
+*.x
+lsm/lib/*
+lsm/obj/*
+lsm/include/*

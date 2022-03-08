@@ -1,5 +1,6 @@
 module surface
 
+  use parameters
   use grid
   use variables
   use liblsm_f
@@ -12,6 +13,48 @@ module surface
 contains
 
   subroutine init_surface()
+
+    select case (LAND_SURFACE_MODEL)
+
+    case ("fakelsm")
+      call init_fakelsm()
+
+    !! INSERT CASE + CALL TO LSM INIT SUBROUTINE HERE
+
+    case default
+        call fail("Land surface model not found")
+
+    end select
+
+  end subroutine init_surface
+
+  subroutine ts_surface()
+
+    select case (LAND_SURFACE_MODEL)
+
+    case ("fakelsm")
+      call ts_fakelsm()
+
+    !! INSERT CASE + CALL TO LSM TIMESTEP SUBROUTINE HERE
+
+    case default
+        call fail("Land surface model not found")
+
+    end select
+
+  end subroutine ts_surface
+
+  function get_gridcell_index(i, j) result(ij)
+    integer :: i, j, ij
+    ij = (i-1)*nlon_local + j - 1
+  end function get_gridcell_index
+
+
+  !!!!!!!!!!!!!!!!!!!!!!
+  !! INIT SUBROUTINES !!
+  !!!!!!!!!!!!!!!!!!!!!!
+
+  subroutine init_fakelsm()
 
     integer :: i, j, gc_index
 
@@ -27,9 +70,14 @@ contains
       end do
     end do
 
-  end subroutine init_surface
+  end subroutine init_fakelsm
 
-  subroutine ts_surface()
+  
+  !!!!!!!!!!!!!!!!!!!!!!!!!!
+  !! TIMESTEP SUBROUTINES !!
+  !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  subroutine ts_fakelsm()
 
     ! The surface model (here fakelsm) takes climate data and returns:
     !   swup -> [W/m2] Upwards shortwave radiation
@@ -44,11 +92,7 @@ contains
       end do
     end do
 
-  end subroutine ts_surface
+  end subroutine ts_fakelsm
 
-  function get_gridcell_index(i, j) result(ij)
-    integer :: i, j, ij
-    ij = (i-1)*nlon_local + j - 1
-  end function get_gridcell_index
 
 end module surface

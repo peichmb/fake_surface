@@ -1,9 +1,4 @@
 # DO NOT TRACK THESE #
 # ################## #
 
-*.o # Object files
-*.a # Static libraries
-*.x # Executable files
-*.out # Fakeatm output files
-*.txt # Fakeatm output files
 test_data # Test data

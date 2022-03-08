@@ -1,0 +1,7 @@
+*.mod
+*.x
+bld/*
+output/*
+parameters_serial.in
+out_serial.txt
+out_mpi.txt

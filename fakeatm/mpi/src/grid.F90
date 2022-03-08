@@ -219,4 +219,17 @@ contains
 
   end subroutine finalize_grid
 
+  subroutine fail(message)
+
+    character(len=*) :: message
+    call finalize_grid()
+    call finalize_parallel()
+    if (mpi_rank==0) then
+      stop trim(message)
+    else
+      stop 
+    end if
+
+  end subroutine fail
+
 end module grid

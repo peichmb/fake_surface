@@ -7,7 +7,7 @@ module atmosphere
   implicit none
 
   double precision :: z_level = 10.d0
-  character(len=LEN_FNAME), dimension(:,:), allocatable :: climate_fnames
+  character(len=LEN_STR), dimension(:,:), allocatable :: climate_fnames
 
 contains
 
@@ -24,7 +24,7 @@ contains
     implicit none
 
     double precision :: lat, lon
-    character(LEN_FNAME) :: fname
+    character(LEN_STR) :: fname
     character(1) :: dirlat, dirlon
     character(3) :: intlat, intlon, declat, declon
 
@@ -72,7 +72,7 @@ contains
     integer :: ncid, varid, i, j
     integer, dimension(2) :: start, cnt
     real, dimension(11) :: forcings
-    character(LEN_FNAME) :: fname
+    character(LEN_STR) :: fname
     
     start = (/ 1, timestep /)
     cnt = (/ 11, 1 /)

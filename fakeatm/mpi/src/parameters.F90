@@ -15,9 +15,10 @@ module parameters
   ! I/O
   logical :: SCREEN_OUTPUT ! Whether to print output to screen
   integer :: TSTEPS_WRITE ! Write output record every TSTEPS_WRITE time steps
-  integer, parameter :: LEN_FNAME=1000
-  character(LEN_FNAME) :: CLIMATE_DATA_PATH
-  character(LEN_FNAME) :: OUTPUT_DATA_PATH
+  integer, parameter :: LEN_STR=1000
+  character(LEN_STR) :: CLIMATE_DATA_PATH
+  character(LEN_STR) :: OUTPUT_DATA_PATH
+  character(LEN_STR) :: LAND_SURFACE_MODEL
 
 contains
 
@@ -58,6 +59,7 @@ contains
     READ(10,*) CLIMATE_DATA_PATH
     READ(10,*) OUTPUT_DATA_PATH
     READ(10,*) SCREEN_OUTPUT
+    READ(10,*) LAND_SURFACE_MODEL
     close(10)
 
     CLIMATE_DATA_PATH = trim(CLIMATE_DATA_PATH) // "/"

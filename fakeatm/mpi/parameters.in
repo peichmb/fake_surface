@@ -1,14 +1,15 @@
-4           ! [INT] NLAT; Number of latitude points
-5           ! [INT] NLON; Number of longitude points
-2           ! [INT] NDOM_LAT; Number of domains in the latitudinal direction
-3           ! [INT] NDOM_LON; Number of domains in the longitudinal direction
--7.75d0     ! [DOUBLE] LAT0; Latitude of southernmost gridcells
--55.625d0   ! [DOUBLE] LON0; Longitude of easternmost gridcells
-2.0d0       ! [DOUBLE] DLAT; Gridcell size in the latitudinal direction
-1.875d0     ! [DOUBLE] DLON; Gridcell size in the longitudinal direction
-5           ! [INT] NDAYS; Number of simulation days
-24          ! [INT] NTSTEPS_DAY; Number of periods per day
-1           ! [INT] TSTEPS_WRITE; Write output every TSTEPS_WRITE timesteps
-"../../test_data"  ! [STR] CLIMATE_DATA_PATH; Path to climate data
-"output"    ! [STR] OUTPUT_DATA_PATH; Output will be written into this directory
-.true.      ! [BOOL] PRINT_TO_SCREEN; Print global variable to screen (slow!)
+4                   ! [INT] NLAT; Number of latitude points
+5                   ! [INT] NLON; Number of longitude points
+2                   ! [INT] NDOM_LAT; Number of domains in the latitudinal direction
+3                   ! [INT] NDOM_LON; Number of domains in the longitudinal direction
+-7.75d0             ! [DOUBLE] LAT0; Latitude of southernmost gridcells
+-55.625d0           ! [DOUBLE] LON0; Longitude of easternmost gridcells
+2.0d0               ! [DOUBLE] DLAT; Gridcell size in the latitudinal direction
+1.875d0             ! [DOUBLE] DLON; Gridcell size in the longitudinal direction
+5                   ! [INT] NDAYS; Number of simulation days
+24                  ! [INT] NTSTEPS_DAY; Number of periods per day
+1                   ! [INT] TSTEPS_WRITE; Write output every TSTEPS_WRITE timesteps
+"../../test_data"   ! [STR] CLIMATE_DATA_PATH; Path to climate data
+"output"            ! [STR] OUTPUT_DATA_PATH; Output will be written into this directory
+.true.              ! [BOOL] PRINT_TO_SCREEN; Print global variable to screen (slow!)
+"fakelsm"           ! [STR] LAND_SURFACE_MODEL; Land surface model to use

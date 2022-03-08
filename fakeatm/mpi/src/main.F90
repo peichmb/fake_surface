@@ -10,26 +10,45 @@ program fakeatm
   implicit none
 
   ! INITIALIZATION
-  call init_parallel()
-  call init_parameters(mpi_rank)
-  call check_domain()
-  call init_grid()
-  call init_variables()
-  call init_atmosphere()
-  call init_surface()
+  call initialize_all()
 
   ! MAIN LOOP
-  do timestep=1,TSTEPS
-    call ts_atmosphere()
-    call ts_surface()
-    call print_to_screen()
-    call write_output()
-  end do
+  call main_loop()
 
-  call finalize_grid()
-  call finalize_parallel()
+  ! NORMAL EXIT
+  call finalize_all()
 
 contains
+
+  subroutine initialize_all()
+
+    call init_parallel()
+    call init_parameters(mpi_rank)
+    call check_domain()
+    call init_grid()
+    call init_variables()
+    call init_atmosphere()
+    call init_surface()
+
+  end subroutine initialize_all
+
+  subroutine main_loop()
+
+    do timestep=1,TSTEPS
+      call ts_atmosphere()
+      call ts_surface()
+      call print_to_screen()
+      call write_output()
+    end do
+
+  end subroutine main_loop
+
+  subroutine finalize_all()
+
+    call finalize_grid()
+    call finalize_parallel()
+
+  end subroutine finalize_all
 
   subroutine print_to_screen()
 
@@ -38,4 +57,5 @@ contains
     end if
 
   end subroutine print_to_screen
+
 end program fakeatm
