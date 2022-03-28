@@ -10,13 +10,16 @@ all: lib main_c.x main_cpp.x main_f.x
 lib: $(LSM_LIB)/liblsm.a
 
 $(LSM_LIB)/liblsm.a: $(LSM_OBJ)/liblsm.o $(LSM_OBJ)/liblsm_f.o
+	mkdir -p $(LSM_LIB)
 	ar rcs $(LSM_LIB)/liblsm.a $(LSM_OBJ)/liblsm.o $(LSM_OBJ)/liblsm_f.o
 	cp $(LSM_SRC)/liblsm.h $(LSM_INC)
 
 $(LSM_OBJ)/liblsm.o: $(LSM_SRC)/liblsm.cpp $(LSM_SRC)/lsm.h
+	mkdir -p $(LSM_OBJ)
 	$(CXX) -o $(LSM_OBJ)/liblsm.o -c $(LSM_SRC)/liblsm.cpp
 
 $(LSM_OBJ)/liblsm_f.o: $(LSM_SRC)/liblsm_f.F90
+	mkdir -p $(LSM_OBJ) $(LSM_INC)
 	$(FC) -o $(LSM_OBJ)/liblsm_f.o -c $(LSM_SRC)/liblsm_f.F90
 	mv liblsm_f.mod $(LSM_INC)
 
